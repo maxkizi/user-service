@@ -1,0 +1,8 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    open-in-view: false
+  liquibase:
+    change-log: classpath:/db/liquibase-changelog.xml
