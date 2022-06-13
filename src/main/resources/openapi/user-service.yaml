@@ -1,0 +1,227 @@
+openapi: 3.0.2
+info:
+  description: Сервис регистрации и учёта пользователей
+  version: 1.0.0
+  title: user-service
+  contact:
+    email: maxkizi@yandex.ru
+servers:
+  - url: http://localhost:8080/api/v1
+tags:
+  - name: UserController
+    description: Создание пользователя, получение информации о пользователе, изменение статуса пользователя
+  - name: ServerStatisticController
+    description: Получение статистики сервера
+paths:
+  /user:
+    post:
+      tags:
+        - UserController
+      summary: Создание пользователя
+      description: Создание пользователя
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDto'
+
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
+
+        '400':
+          description: Bad request
+          content:
+            text:
+              schema:
+                type: string
+                example: Недостаточно данных для создания пользователя или данные некорректны.
+  /user/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+          description: Id пользователя
+          example: 23
+    get:
+      tags:
+        - UserController
+      summary: Получение пользователя по Id
+      description: Получение пользователя по Id
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
+        '404':
+          description: Not found
+          content:
+            text:
+              schema:
+                type: string
+                example: Пользователь не найден
+    put:
+      tags:
+        - UserController
+      summary: Изменение статуса пользователя по Id
+      description: Изменение статуса пользователя по Id
+      parameters:
+        - name: status
+          in: query
+          required: true
+          schema:
+            type: string
+            description: Статус пользователя
+            example: offline
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserStatusDto'
+        '404':
+          description: Not found
+          content:
+            text:
+              schema:
+                type: string
+                example: Пользователь не найден
+
+  /statistic:
+    parameters:
+      - name: status
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Статус пользователя
+          example: online, offline, none
+      - name: isAdult
+        in: query
+        required: false
+        schema:
+          type: boolean
+          description: Совершеннолетние пользователи нужны в статистике?
+          example: true, false
+    get:
+      tags:
+        - ServerStatisticController
+      summary: Получение статистики сервера
+      description: Получение статистики сервера
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerStatisticDto'
+
+
+
+
+components:
+  schemas:
+    UserDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          example: 2
+          description: Id пользователя
+        username:
+          type: string
+          example: Maxim
+          description: Имя пользователя
+        dateOfBirth:
+          type: string
+          example: 23.04.94
+          description: Дата рождения
+        email:
+          type: string
+          example: fakemail@google.com
+          description: Электронная почта пользователя
+        age:
+          type: integer
+          example: 12
+          description: Возраст
+          readOnly: true
+        status:
+          type: string
+          example: online
+          description: Статус пользователя
+          readOnly: true
+      required:  [username, dateOfBirth, email]
+
+    UserStatusDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          example: 11
+          description: Id пользователя
+        previousStatus:
+          type: string
+          readOnly: true
+          example: online
+          description: Предыдущий статус пользователя
+        newStatus:
+          type: string
+          readOnly: true
+          example: offline
+          description: Новый статус пользователя
+
+    ServerStatisticDto:
+      type: object
+      properties:
+        usersCount:
+          type: integer
+          readOnly: true
+          example: 54
+          description: Колличество пользователей удовлетворяющих критериям поиска
+        averageAge:
+          type: number
+          readOnly: true
+          example: 26.6
+          description: Средний возраст в статистике
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserDto'
+          readOnly: true
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
