@@ -1,7 +1,7 @@
 package org.maxkizi.userservice.controller;
 
-import org.maxkizi.userservice.dto.UserDto;
-import org.maxkizi.userservice.dto.UserStatusDto;
+import org.maxkizi.userservice.dto.ApplicationUserDto;
+import org.maxkizi.userservice.dto.ApplicationUserStatusDto;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,18 +16,18 @@ import static org.maxkizi.userservice.controller.Controllers.USER_BY_ID;
 public class UserController {
 
     @PostMapping(USER)
-    public UserDto createUser(UserDto userDto) {
+    public ApplicationUserDto createUser(ApplicationUserDto applicationUserDto) {
         return null;
     }
 
     @GetMapping(USER_BY_ID)
-    public UserDto findById(@PathVariable(name = "id") Long id) {
+    public ApplicationUserDto findById(@PathVariable(name = "id") Long id) {
         return null;
     }
 
     @PutMapping(USER_BY_ID)
-    public UserStatusDto updateStatus(@PathVariable(name = "id") Long id,
-                                      @RequestParam(name = "status") String status) {
+    public ApplicationUserStatusDto updateStatus(@PathVariable(name = "id") Long id,
+                                                 @RequestParam(name = "status") String status) {
         return null;
     }
 }

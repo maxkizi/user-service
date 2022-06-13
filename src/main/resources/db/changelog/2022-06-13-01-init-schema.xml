@@ -1,0 +1,27 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet id="1" author="maxkizi">
+        <createTable tableName="application_user" remarks="Table of users">
+            <column name="id" type="bigserial" autoIncrement="true" remarks="User's id">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="username" type="text" remarks="User's name">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_of_birth" type="date" remarks="User's birth date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="text" remarks="User's email">
+                <constraints nullable="false"/>
+            </column>
+            <column name="age" type="integer" remarks="User's age">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_status" type="text" remarks="User's status">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

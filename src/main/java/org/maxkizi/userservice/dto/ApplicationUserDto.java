@@ -1,7 +1,7 @@
 package org.maxkizi.userservice.dto;
 
 
-public class UserDto {
+public class ApplicationUserDto {
     private Long id;
     private String username;
     private String dateOfBirth;
