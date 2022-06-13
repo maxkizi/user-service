@@ -1,19 +1,20 @@
 package org.maxkizi.userservice.converter;
 
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
 import org.maxkizi.userservice.dto.ApplicationUserDto;
 import org.maxkizi.userservice.model.ApplicationUser;
-import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Component;
 
-@Component
-public class ApplicationUserConverter {
-    private final ModelMapper modelMapper = new ModelMapper();
+@Mapper
+public interface ApplicationUserConverter {
+    @Mappings({
+            @Mapping(target = "dateOfBirth", dateFormat = "dd.MM.yyyy")
+    })
+    ApplicationUserDto toDto(ApplicationUser entity);
 
-    public ApplicationUserDto toDto(ApplicationUser user) {
-        return modelMapper.map(user, ApplicationUserDto.class);
-    }
-
-    public ApplicationUser toEntity(ApplicationUserDto dto){
-        return modelMapper.map(dto, ApplicationUser.class);
-    }
- }
+    @Mappings({
+            @Mapping(target = "dateOfBirth", dateFormat = "dd.MM.yyyy")
+    })
+    ApplicationUser toEntity(ApplicationUserDto userDto);
+}

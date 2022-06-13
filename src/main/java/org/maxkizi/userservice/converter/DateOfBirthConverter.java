@@ -4,7 +4,6 @@ import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Optional;
 
 @Converter
 public class DateOfBirthConverter implements AttributeConverter<LocalDate, java.sql.Date> {

@@ -1,4 +1,4 @@
-package org.maxkizi.userservice.repository;
+package org.maxkizi.userservice;
 
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
