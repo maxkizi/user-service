@@ -1,0 +1,13 @@
+server:
+  port: 0
+spring:
+  datasource:
+    url: jdbc:tc:postgresql:13.1:///
+    username: postgres
+    password: postgres
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+  jpa:
+    show-sql: true
+  liquibase:
+    change-log: classpath:/db/liquibase-changelog.xml
+    contexts: test

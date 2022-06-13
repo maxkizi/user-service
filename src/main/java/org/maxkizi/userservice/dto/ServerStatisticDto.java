@@ -6,5 +6,5 @@ import java.util.List;
 public class ServerStatisticDto {
     private Long userCount;
     private Float averageAge;
-    private List<UserDto> users = new ArrayList<>();
+    private List<ApplicationUserDto> users = new ArrayList<>();
 }
