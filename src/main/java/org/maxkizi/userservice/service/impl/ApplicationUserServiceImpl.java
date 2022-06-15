@@ -3,7 +3,6 @@ package org.maxkizi.userservice.service.impl;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.maxkizi.userservice.converter.ApplicationUserConverter;
-import org.maxkizi.userservice.dto.ApplicationUserDto;
 import org.maxkizi.userservice.dto.ApplicationUserStatusDto;
 import org.maxkizi.userservice.enumeration.UserStatus;
 import org.maxkizi.userservice.exception.UserNotFoundException;
@@ -26,7 +25,6 @@ public class ApplicationUserServiceImpl extends AbstractBaseService<ApplicationU
     private final ApplicationUserRepository repository;
     private final ApplicationUserConverter userConverter;
 
-
     @Override
     @Transactional
     public ApplicationUser create(ApplicationUser user) {
@@ -43,10 +41,10 @@ public class ApplicationUserServiceImpl extends AbstractBaseService<ApplicationU
     @Override
     @Transactional
     public ApplicationUserStatusDto updateStatus(Long id, UserStatus userStatus) {
-        String previousStatus = get(id).orElseThrow(UserNotFoundException::new).getUserStatus().getTextStatus();
-        getRepository().updateUserStatus(userStatus.getTextStatus(), id);
+        String previousStatus = get(id).orElseThrow(UserNotFoundException::new).getUserStatus().name();
+        getRepository().updateUserStatus(userStatus.name(), id);
         return ApplicationUserStatusDto.builder()
-                .newStatus(userStatus.getTextStatus())
+                .newStatus(userStatus.name())
                 .previousStatus(previousStatus)
                 .id(id)
                 .build();

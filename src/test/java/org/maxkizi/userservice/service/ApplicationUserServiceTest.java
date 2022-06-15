@@ -50,8 +50,8 @@ class ApplicationUserServiceTest extends BaseIntegrationTest {
         Assertions.assertEquals(UserStatus.NONE, savedUser.getUserStatus());
 
         ApplicationUserStatusDto userStatusDto = service.updateStatus(savedUser.getId(), UserStatus.ONLINE);
-        Assertions.assertEquals(UserStatus.ONLINE.getTextStatus(), userStatusDto.getNewStatus());
-        Assertions.assertEquals(UserStatus.NONE.getTextStatus(), userStatusDto.getPreviousStatus());
+        Assertions.assertEquals(UserStatus.ONLINE.name(), userStatusDto.getNewStatus());
+        Assertions.assertEquals(UserStatus.NONE.name(), userStatusDto.getPreviousStatus());
         Assertions.assertEquals(savedUser.getId(), userStatusDto.getId());
     }
 }

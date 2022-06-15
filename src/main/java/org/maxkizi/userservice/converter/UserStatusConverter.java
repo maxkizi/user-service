@@ -9,11 +9,11 @@ import javax.persistence.Converter;
 public class UserStatusConverter implements AttributeConverter<UserStatus, String> {
     @Override
     public String convertToDatabaseColumn(UserStatus userStatus) {
-        return userStatus.getTextStatus();
+        return userStatus.name();
     }
 
     @Override
     public UserStatus convertToEntityAttribute(String textStatus) {
-        return UserStatus.findByTextValue(textStatus);
+        return UserStatus.valueOf(textStatus);
     }
 }

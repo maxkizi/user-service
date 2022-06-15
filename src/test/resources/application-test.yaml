@@ -11,3 +11,5 @@ spring:
   liquibase:
     change-log: classpath:/db/liquibase-changelog.xml
     contexts: test
+
+adultAge: 18
