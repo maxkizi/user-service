@@ -28,6 +28,7 @@ public class ApplicationUserServiceImpl extends AbstractBaseService<ApplicationU
     @Override
     @Transactional
     public ApplicationUser create(ApplicationUser user) {
+
         user.setAge(calculateAge(user.getDateOfBirth()));
         return save(user);
     }
