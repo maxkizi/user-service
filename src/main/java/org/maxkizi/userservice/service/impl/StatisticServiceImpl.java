@@ -48,9 +48,9 @@ public class StatisticServiceImpl extends AbstractBaseService<ApplicationUser, L
 
     private ServerStatisticDto buildDto(List<ApplicationUserDto> users) {
         return ServerStatisticDto.builder()
-                .userCount(repository.count())
-                .users(users)
-                .averageAge(users.stream().mapToInt(ApplicationUserDto::getAge).average().orElse(Double.NaN))
+                .totalUserCountInService(repository.count())
+                .usersInStatistic(users)
+                .averageAgeInStatistic(users.stream().mapToInt(ApplicationUserDto::getAge).average().orElse(Double.NaN))
                 .build();
     }
 }

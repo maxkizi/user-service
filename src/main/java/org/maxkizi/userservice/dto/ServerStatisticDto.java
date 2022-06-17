@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 public class ServerStatisticDto {
-    private Long userCount;
-    private Double averageAge;
-    private List<ApplicationUserDto> users = new ArrayList<>();
+    private Long totalUserCountInService;
+    private Double averageAgeInStatistic;
+    private List<ApplicationUserDto> usersInStatistic = new ArrayList<>();
 }
