@@ -35,11 +35,7 @@ paths:
 
         '400':
           description: Bad request
-          content:
-            text:
-              schema:
-                type: string
-                example: Недостаточно данных для создания пользователя или данные некорректны.
+
   /user/{id}:
     parameters:
       - name: id
@@ -89,6 +85,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserStatusDto'
+        '400':
+          description: Bad request
         '404':
           description: Not found
           content:
@@ -125,6 +123,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerStatisticDto'
+        '400':
+          description: Bad request
+          content:
+            text:
+              schema:
+                type: string
+                example: Некорректный статус пользователя. Статус должен быть ONLINE, OFFLINE или NONE (нечувствителен к регистру)
 
 
 
@@ -202,26 +207,3 @@ components:
           items:
             $ref: '#/components/schemas/UserDto'
           readOnly: true
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
