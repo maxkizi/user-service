@@ -28,13 +28,11 @@ public class ApplicationUserServiceImpl extends AbstractBaseService<ApplicationU
     @Override
     @Transactional
     public ApplicationUser create(ApplicationUser user) {
-
         user.setAge(calculateAge(user.getDateOfBirth()));
         return save(user);
     }
 
     @Override
-    @Transactional
     public ApplicationUser finnById(Long id) {
         return get(id).orElseThrow(UserNotFoundException::new);
     }

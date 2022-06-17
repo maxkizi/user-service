@@ -7,6 +7,7 @@ import org.maxkizi.userservice.BaseIntegrationTest;
 import org.maxkizi.userservice.TestDataProvider;
 import org.maxkizi.userservice.dto.ApplicationUserStatusDto;
 import org.maxkizi.userservice.enumeration.UserStatus;
+import org.maxkizi.userservice.exception.UserNotFoundException;
 import org.maxkizi.userservice.model.ApplicationUser;
 import org.maxkizi.userservice.repository.ApplicationUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,5 +54,19 @@ class ApplicationUserServiceTest extends BaseIntegrationTest {
         Assertions.assertEquals(UserStatus.ONLINE.name(), userStatusDto.getNewStatus());
         Assertions.assertEquals(UserStatus.NONE.name(), userStatusDto.getPreviousStatus());
         Assertions.assertEquals(savedUser.getId(), userStatusDto.getId());
+    }
+
+    @Test
+    void findDeletedUser_shouldThrowUserNotFoundException(){
+        Long id = service.create(testDataProvider.buildTestUser(3, LocalDate.now())).getId();
+        repository.deleteAll();
+        Assertions.assertThrows(UserNotFoundException.class, () -> service.finnById(id));
+    }
+
+    @Test
+    void updateStatus_shouldThrowUserNotFoundException(){
+        Long id = service.create(testDataProvider.buildTestUser(4, LocalDate.now())).getId();
+        repository.deleteAll();
+        Assertions.assertThrows(UserNotFoundException.class, () -> service.updateStatus(id, UserStatus.OFFLINE));
     }
 }

@@ -13,31 +13,26 @@ public abstract class AbstractBaseService<T extends BaseEntity, I extends Serial
     public abstract R getRepository();
 
     @Override
-    @Transactional(propagation = Propagation.SUPPORTS, rollbackFor = Exception.class)
     public Optional<T> get(I id) {
         return getRepository().findById(id);
     }
 
     @Override
-    @Transactional(propagation = Propagation.SUPPORTS, rollbackFor = Exception.class)
     public List<T> findAll() {
         return getRepository().findAll();
     }
 
     @Override
-    @Transactional(propagation = Propagation.SUPPORTS, rollbackFor = Exception.class)
     public T save(T t) {
         return getRepository().save(t);
     }
 
     @Override
-    @Transactional(propagation = Propagation.SUPPORTS, rollbackFor = Exception.class)
     public void delete(I id) {
         getRepository().deleteById(id);
     }
 
     @Override
-    @Transactional(propagation = Propagation.SUPPORTS, rollbackFor = Exception.class)
     public boolean isExists(I id) {
         return getRepository().existsById(id);
     }
